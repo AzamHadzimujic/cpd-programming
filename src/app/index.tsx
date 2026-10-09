@@ -16,7 +16,7 @@ function getDevMenuHint() {
   if (Device.isDevice) {
     return (
       <ThemedText type="small">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
+        shake device or press <ThemedText type="code">m</ThemedText> in terminal if you want of course
       </ThemedText>
     );
   }
@@ -35,7 +35,7 @@ export default function HomeScreen() {
         <ThemedView style={styles.heroSection}>
           <AnimatedIcon />
           <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
+            Welcome to&nbsp;Expo ENJOY YOUR STAY
           </ThemedText>
         </ThemedView>
 
