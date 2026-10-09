@@ -10,3 +10,9 @@ contact: { github: "lejla-codes" } },
 const greet = (student) => {
     'Hi ' + student.name + ', you are in year ' + student.year + '!';
 }
+students.forEach((student) => {
+  console.log(greet(student));
+});
+
+const names = students.map((student) => student.name);
+console.log(names);
