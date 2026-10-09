@@ -7,6 +7,7 @@ contact: { github: "lejla-codes" } },
 { id: 4, name: "Tarik", year: 3, grades: [7, 6, 8] },
 ];
 
+// Task 1
 const greet = (student) => {
     'Hi ' + student.name + ', you are in year ' + student.year + '!';
 }
@@ -14,5 +15,13 @@ students.forEach((student) => {
   console.log(greet(student));
 });
 
+// Task 2
 const names = students.map((student) => student.name);
 console.log(names);
+
+// Task 3
+const thirdYearStudents = students
+  .filter((student) => student.year === 3)
+  .map((student) => student.name);
+
+console.log(thirdYearStudents);
