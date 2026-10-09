@@ -34,3 +34,12 @@ const studentsWithAverage = students.map((student) => ({
   ...student,
   average: average(student.grades),
 }));
+studentsWithAverage.forEach((student) => {
+  console.log(`${student.name}: ${student.average.toFixed(2)}`);
+});
+
+const promotedStudents = students.map((student) =>
+  student.name === "Emir"
+    ? { ...student, year: 3 }
+    : student
+);
