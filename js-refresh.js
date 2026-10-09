@@ -25,3 +25,12 @@ const thirdYearStudents = students
   .map((student) => student.name);
 
 console.log(thirdYearStudents);
+
+// Task 4
+const average = (grades) =>
+  grades.reduce((sum, grade) => sum + grade, 0) / grades.length;
+
+const studentsWithAverage = students.map((student) => ({
+  ...student,
+  average: average(student.grades),
+}));
