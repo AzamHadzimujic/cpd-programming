@@ -1,10 +1,12 @@
-
 import { useState } from 'react';
-import { Text, View, TextInput, Pressable } from 'react-native';
+import { Text, View } from 'react-native';
 import { styles } from './styles';
 
+import AddTodo from '../lab02/AddToDo';
+import TodoItem from '../lab02/ToDoItem';
+import FilterBar from '../lab02/FilterBar';
+
 export default function Todo() {
-  const [text, setText] = useState('');
   const [filter, setFilter] = useState('all');
 
   const [todos, setTodos] = useState([
@@ -12,21 +14,14 @@ export default function Todo() {
     { id: '2', title: 'Finish Lab 2', done: false },
   ]);
 
-  function addTodo() {
-    const title = text.trim();
-
-    if (title === '') {
-      return;
-    }
-
+  function addTodo(title) {
     const newTodo = {
       id: Date.now().toString(),
-      title: title,
+      title,
       done: false,
     };
 
     setTodos(previous => [...previous, newTodo]);
-    setText('');
   }
 
   function toggleTodo(id) {
@@ -39,7 +34,7 @@ export default function Todo() {
     );
   }
 
-  function deleteTodo(id) {
+  function removeTodo(id) {
     setTodos(previous =>
       previous.filter(todo => todo.id !== id)
     );
@@ -58,65 +53,23 @@ export default function Todo() {
       <Text style={styles.title}>To-Do List</Text>
       <Text>{left} left</Text>
 
-      <View style={{ flexDirection: 'row', gap: 8 }}>
-        <TextInput
-          value={text}
-          onChangeText={setText}
-          placeholder="New task"
-          style={styles.input}
-        />
+      <AddTodo onAdd={addTodo} />
 
-        <Pressable onPress={addTodo}>
-          <Text>Add</Text>
-        </Pressable>
-      </View>
-
-      <View style={{ flexDirection: 'row', gap: 10 }}>
-        {['all', 'active', 'done'].map(item => (
-          <Pressable
-            key={item}
-            onPress={() => setFilter(item)}
-            style={{
-              padding: 8,
-              backgroundColor:
-                filter === item ? 'lightblue' : 'lightgrey',
-            }}
-          >
-            <Text>
-              {item.charAt(0).toUpperCase() + item.slice(1)}
-            </Text>
-          </Pressable>
-        ))}
-      </View>
+      <FilterBar
+        filter={filter}
+        onChange={setFilter}
+      />
 
       {todos.length === 0 ? (
         <Text>No tasks yet</Text>
       ) : (
         visibleTodos.map(todo => (
-          <View
+          <TodoItem
             key={todo.id}
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              gap: 10,
-              marginTop: 10,
-            }}
-          >
-            <Pressable onPress={() => toggleTodo(todo.id)}>
-              <Text
-                style={{
-                  textDecorationLine:
-                    todo.done ? 'line-through' : 'none',
-                }}
-              >
-                {todo.title}
-              </Text>
-            </Pressable>
-
-            <Pressable onPress={() => deleteTodo(todo.id)}>
-              <Text>Delete</Text>
-            </Pressable>
-          </View>
+            todo={todo}
+            onToggle={toggleTodo}
+            onRemove={removeTodo}
+          />
         ))
       )}
     </View>
