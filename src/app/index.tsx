@@ -1,1 +1,1 @@
-export { default } from '../lab02/ToDo';
+export { default } from '../lab02/Counter';

@@ -30,6 +30,17 @@ export default function Counter() {
         </Pressable>
 
         <Pressable
+            onPress={() => {
+            setCount(c => c + 1);
+            setCount(c => c + 1);
+            setCount(c => c + 1);
+        }}
+          style={{ padding: 12, backgroundColor: 'lightblue' }}
+        >
+          <Text>+3</Text>
+        </Pressable>
+
+        <Pressable
           onPress={() => setCount(0)}
           style={{ padding: 12, backgroundColor: 'lightblue' }}
         >
